@@ -2,9 +2,6 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy 1st Mensiversary Eyin Cantik Ku 💙</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -92,6 +89,31 @@
             margin-bottom: 25px;
             font-weight: 600;
         }
+
+        .music-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+
         .timer-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -311,39 +333,6 @@
             margin-top: 15px;
         }
 
-        .love-meter-card { overflow: hidden; }
-        .love-meter-intro { color: #315b82; margin: 8px 0 18px; }
-        .love-meter-display {
-            background: linear-gradient(135deg, rgba(144,224,239,0.22), rgba(255,255,255,0.8));
-            border: 1px solid rgba(72,202,228,0.35);
-            border-radius: 18px;
-            padding: 20px 12px;
-            margin: 16px 0;
-        }
-        .love-meter-emoji { font-size: 2.8rem; min-height: 54px; transition: transform .2s ease; }
-        .love-meter-number { color: var(--primary); font-size: clamp(2.4rem, 8vw, 3.6rem); font-weight: 700; line-height: 1.1; }
-        .love-percent { font-size: .48em; margin-left: 3px; }
-        .love-meter-message { color: #16436b; font-weight: 600; margin-top: 8px; min-height: 26px; }
-        .slider-container { margin: 22px 0 10px; }
-        .slider { touch-action: pan-y; }
-        .slider-labels { display: flex; justify-content: space-between; color: #5b7892; font-size: .8rem; margin-top: 8px; }
-        .love-meter-presets { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 18px 0; }
-        .love-preset {
-            border: 1px solid #90d9e8; background: white; color: #0876aa;
-            border-radius: 999px; padding: 8px 16px; font-weight: 600; cursor: pointer;
-            transition: transform .15s ease, background .15s ease;
-        }
-        .love-preset:active { transform: scale(.95); background: #e0f7fa; }
-        .love-meter-progress { height: 12px; background: #d9f3f8; border-radius: 99px; overflow: hidden; }
-        .love-meter-progress-fill { width: 100%; height: 100%; border-radius: inherit; background: linear-gradient(90deg,#90e0ef,#0077b6); transition: width .25s ease; }
-        .love-meter-hint { color: #4b6f8b; font-size: .9rem; margin: 10px 0 18px; }
-        .love-surprise-btn { margin-top: 4px; }
-        .love-surprise-message { color: #0876aa; font-weight: 600; min-height: 24px; margin-top: 12px; }
-        @media (max-width: 600px) {
-            .love-meter-display { padding: 16px 8px; }
-            .love-preset { padding: 8px 13px; }
-        }
-
         .floating-kiss {
             position: fixed;
             font-size: 2.5rem;
@@ -428,6 +417,9 @@
 <body>
 
     <canvas id="particleCanvas"></canvas>
+
+    <button class="music-btn" id="musicBtn" onclick="toggleAudio()" title="Putar Musik Melodi Romantis">🎵</button>
+
     <div class="container">
         <!-- Header Utama -->
         <div class="glass-card">
@@ -481,14 +473,12 @@ I do really love you, yin. Aku harap kita bisa terus sama sama and see each othe
             </div>
         </div>
 
-
-        <!-- Lil gift for u -->
+        <!-- Video hadiah -->
         <div class="glass-card">
             <h2>🎁 lil gift for u</h2>
-            <p style="margin: 10px 0 18px; color: #023e8a;">a little something just for you 💙</p>
-            <video controls playsinline preload="metadata" style="width: 100%; max-width: 420px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0, 119, 182, 0.18);">
+            <video controls playsinline preload="metadata" style="width:100%; max-width:100%; border-radius:15px; margin-top:10px; background:#000;">
                 <source src="4a9de107-e876-415b-8b16-e7fdab3cefb9.mov" type="video/quicktime">
-                Browser kamu belum mendukung pemutar video.
+                Browser kamu belum mendukung pemutaran video.
             </video>
         </div>
 
@@ -503,16 +493,48 @@ I do really love you, yin. Aku harap kita bisa terus sama sama and see each othe
             <div id="answerResult" class="answer-box"></div>
         </div>
 
+        <!-- Galeri Polaroid -->
+        <div class="glass-card">
+            <h2>📸 Galeri Kenangan Kita</h2>
+            <p style="font-size: 0.9rem; color: #023e8a;">Momen-momen manis yang sudah kita lewati bersama</p>
+            <div class="polaroid-grid">
+                <div class="polaroid" onclick="openLightbox(this)">
+                    <img src="https://i.ibb.co.com/7J2cKShq/IMG-8224.jpg" alt="IMG-8224" onerror="this.src='https://placehold.co/400x450/caf0f8/03045e?text=Eyin+%26+River+1'">
+                    <div class="caption">Carts & Snack Mensive 💙</div>
+                    <button class="like-btn" onclick="toggleLike(event, this)">🤍</button>
+                </div>
+                <div class="polaroid" onclick="openLightbox(this)">
+                    <img src="https://i.ibb.co.com/Pz1SRvp9/IMG-8223.jpg" alt="IMG-8223" onerror="this.src='https://placehold.co/400x450/caf0f8/03045e?text=Eyin+%26+River+2'">
+                    <div class="caption">Cute Cat Moment ✨</div>
+                    <button class="like-btn" onclick="toggleLike(event, this)">🤍</button>
+                </div>
+                <div class="polaroid" onclick="openLightbox(this)">
+                    <img src="https://i.ibb.co.com/j9kJjHKT/Gambar-JPEG-4-E22-9921-0-B-1.jpg" alt="Gambar-JPEG-4-E22-9921-0-B-1" onerror="this.src='https://placehold.co/400x450/caf0f8/03045e?text=Eyin+%26+River+3'">
+                    <div class="caption">Senyuman Favoritku 🩵</div>
+                    <button class="like-btn" onclick="toggleLike(event, this)">🤍</button>
+                </div>
+                <div class="polaroid" onclick="openLightbox(this)">
+                    <img src="https://i.ibb.co.com/jvbvFrF5/Gambar-JPEG-4-E22-9921-0-B-2.jpg" alt="Gambar-JPEG-4-E22-9921-0-B-2" onerror="this.src='https://placehold.co/400x450/caf0f8/03045e?text=Eyin+%26+River+4'">
+                    <div class="caption">OOTD Kita Berdua 💙</div>
+                    <button class="like-btn" onclick="toggleLike(event, this)">🤍</button>
+                </div>
+                <div class="polaroid" onclick="openLightbox(this)" style="grid-column: span auto;">
+                    <img src="https://i.ibb.co.com/4wfK2HwQ/Gambar-JPEG-4-E22-9921-0-B-0.jpg" alt="Gambar-JPEG-4-E22-9921-0-B-0" onerror="this.src='https://placehold.co/400x450/caf0f8/03045e?text=Eyin+%26+River+5'">
+                    <div class="caption">Riding & Mirror View ✨</div>
+                    <button class="like-btn" onclick="toggleLike(event, this)">🤍</button>
+                </div>
+            </div>
+        </div>
 
         <!-- Wish Untuk Hubungan Kita -->
         <div class="glass-card">
             <h2>🌟 Wish Untuk Hubungan Kita</h2>
             <p style="margin-bottom: 15px; font-size: 0.9rem; color: #023e8a;">Harapan-harapan indah untuk perjalanan kita ke depan</p>
             <ul class="wish-list" id="wishList">
-                <li class="wish-item">Semoga kita bisa melihat satu sama lain tumbuh lebih baik</li>
-                <li class="wish-item">Semoga kamu selalu sayang aku</li>
-                <li class="wish-item">Semoga kita bisa sama sama menggapai apa yg kita cita”kan</li>
-                <li class="wish-item">Semoga kita bisa ketemu di tanggal 6 selanjutnya</li>
+                <li class="wish-item">Semoga kita bisa melihat satu sama lain tumbuh lebih baik 💙</li>
+                <li class="wish-item">Semoga kamu selalu sayang aku 💙</li>
+                <li class="wish-item">Semoga kita bisa sama sama menggapai apa yg kita cita”kan 💙</li>
+                <li class="wish-item">Semoga kita bisa ketemu di tanggal 6 selanjutnya 💙</li>
             </ul>
             <div class="wish-input-group">
                 <input type="text" id="newWish" class="wish-input" placeholder="Tulis harapan kamu untuk kita..." onkeypress="handleKeyPress(event)">
@@ -520,35 +542,13 @@ I do really love you, yin. Aku harap kita bisa terus sama sama and see each othe
             </div>
         </div>
 
-        <!-- Interactive Love Meter -->
-        <div class="glass-card love-meter-card">
+        <!-- Custom Love Meter Slider (0% to 1000%) -->
+        <div class="glass-card">
             <h2>💙 Seberapa Sayang Kamu Hari Ini?</h2>
-            <p class="love-meter-intro">Geser sampai angka yang paling menggambarkan perasaanmu ✨</p>
-
-            <div class="love-meter-display">
-                <div class="love-meter-emoji" id="loveEmoji" aria-live="polite">🥰</div>
-                <div class="love-meter-number"><span id="loveValue">1000</span><span class="love-percent">%</span></div>
-                <div class="love-meter-message" id="loveScore" aria-live="polite">Aku juga sayang banget sama kamu!</div>
-            </div>
-
             <div class="slider-container">
-                <input type="range" min="0" max="1000" step="10" value="1000" class="slider" id="loveSlider" aria-label="Love meter dari 0 sampai 1000 persen" oninput="updateLoveMeter(this.value)">
-                <div class="slider-labels"><span>0%</span><span>500%</span><span>1000%</span></div>
+                <input type="range" min="0" max="1000" value="1000" class="slider" id="loveSlider" oninput="updateLoveMeter(this.value)">
             </div>
-
-            <div class="love-meter-presets" aria-label="Pilihan cepat love meter">
-                <button type="button" class="love-preset" onclick="setLoveMeter(100)">100%</button>
-                <button type="button" class="love-preset" onclick="setLoveMeter(500)">500%</button>
-                <button type="button" class="love-preset" onclick="setLoveMeter(1000)">1000%</button>
-            </div>
-
-            <div class="love-meter-progress" aria-label="Visual tingkat love meter">
-                <div class="love-meter-progress-fill" id="loveProgress"></div>
-            </div>
-            <p class="love-meter-hint" id="loveHint">Wah, penuh banget! 💙</p>
-
-            <button type="button" class="btn love-surprise-btn" onclick="loveSurprise()">Kasih aku kejutan 💌</button>
-            <p class="love-surprise-message" id="loveSurpriseMessage" aria-live="polite"></p>
+            <div class="love-score" id="loveScore">1000% - aku juga sayang banget sm kamu sayang</div>
         </div>
     </div>
 
@@ -559,26 +559,38 @@ I do really love you, yin. Aku harap kita bisa terus sama sama and see each othe
     </div>
 
     <script>
-        // Countdown menuju 6 November 2026 pukul 00:34 WIB
+        // Target Date: 6 November 2026 jam 00:34 WIB
         const targetDate = new Date('2026-11-06T00:34:00+07:00').getTime();
 
         function updateTimer() {
-            const now = Date.now();
-            const remaining = Math.max(0, targetDate - now);
+            const now = new Date().getTime();
+            const difference = targetDate - now;
 
-            const days = Math.floor(remaining / 86400000);
-            const hours = Math.floor((remaining % 86400000) / 3600000);
-            const minutes = Math.floor((remaining % 3600000) / 60000);
-            const seconds = Math.floor((remaining % 60000) / 1000);
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+                document.getElementById('days').innerText = days;
+                document.getElementById('hours').innerText = hours;
+                document.getElementById('minutes').innerText = minutes;
+                document.getElementById('seconds').innerText = seconds;
+            } else {
+                const pastTime = Math.abs(difference);
+                const days = Math.floor(pastTime / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((pastTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((pastTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((pastTime % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = days;
+                document.getElementById('hours').innerText = hours;
+                document.getElementById('minutes').innerText = minutes;
+                document.getElementById('seconds').innerText = seconds;
+            }
         }
-
-        updateTimer();
         setInterval(updateTimer, 1000);
+        updateTimer();
 
         // Passcode Unlock Surat Cinta
         function unlockLetter() {
@@ -731,7 +743,7 @@ I do really love you, yin. Aku harap kita bisa terus sama sama and see each othe
                 const ul = document.getElementById('wishList');
                 const li = document.createElement('li');
                 li.className = 'wish-item';
-                li.textContent = wishText;
+                li.innerHTML = `${wishText} 💙`;
                 ul.appendChild(li);
                 input.value = "";
                 triggerConfetti();
@@ -746,60 +758,24 @@ I do really love you, yin. Aku harap kita bisa terus sama sama and see each othe
 
         // Custom Love Meter Logic (0% to 1000%)
         function updateLoveMeter(val) {
-            const num = Math.max(0, Math.min(1000, parseInt(val, 10) || 0));
-            const slider = document.getElementById('loveSlider');
-            const value = document.getElementById('loveValue');
             const score = document.getElementById('loveScore');
-            const emoji = document.getElementById('loveEmoji');
-            const progress = document.getElementById('loveProgress');
-            const hint = document.getElementById('loveHint');
+            const num = parseInt(val, 10);
 
-            if (!slider || !value || !score || !emoji || !progress || !hint) return;
-            slider.value = num;
-            value.textContent = num;
-            slider.style.background = `linear-gradient(to right, #0077b6 0%, #48cae4 ${num / 10}%, #d9f3f8 ${num / 10}%, #d9f3f8 100%)`;
-            progress.style.width = (num / 10) + '%';
-
-            let face, message, extra;
             if (num <= 100) {
-                face = '🤨'; message = 'Hmm, kok kecil banget?'; extra = 'Coba geser lagi, hehe.';
+                score.innerText = `${num}% - ah yakali`;
             } else if (num <= 300) {
-                face = '😊'; message = 'Ada rasa sayang, nih!'; extra = 'Masih bisa ditambah dong.';
+                score.innerText = `${num}% - masa sih sayang…`;
             } else if (num <= 600) {
-                face = '🥰'; message = 'Awww, mulai banyak!'; extra = 'Wah, makin ke kanan makin berbunga-bunga.';
+                score.innerText = `${num}% - kurang banyak`;
             } else if (num <= 900) {
-                face = '😍'; message = 'WADUH, sayangnya banyak!'; extra = 'Dikit lagi menuju level maksimal!';
+                score.innerText = `${num}% - kurang geser ke kanan`;
             } else if (num < 1000) {
-                face = '💗'; message = 'Hampir tak terhingga!'; extra = 'Satu geseran lagi ke angka tertinggi!';
+                score.innerText = `${num}% - dikit lagi sayang`;
             } else {
-                face = '💙'; message = 'Aku juga sayang banget sama kamu!'; extra = 'LOVE METER FULL! Kamu menang banyak hati 💙';
+                score.innerText = `${num}% - aku juga sayang banget sm kamu sayang`;
+                triggerConfetti();
             }
-
-            emoji.textContent = face;
-            score.textContent = message;
-            hint.textContent = extra;
-            emoji.style.transform = 'scale(1.12)';
-            setTimeout(() => { emoji.style.transform = 'scale(1)'; }, 160);
         }
-
-        function setLoveMeter(value) {
-            updateLoveMeter(value);
-            if (value === 1000 && typeof triggerConfetti === 'function') triggerConfetti();
-        }
-
-        function loveSurprise() {
-            const surprises = [
-                'Surprise! Kamu dapat 1000 peluk virtual 🤗',
-                'Pesan kecil: semoga kita selalu punya alasan untuk saling memilih 💙',
-                'Kamu berhasil membuka bonus: satu juta cium jauh 😘',
-                'Hari ini dan seterusnya, semoga hal-hal baik selalu menemukan kita ✨'
-            ];
-            const message = document.getElementById('loveSurpriseMessage');
-            message.textContent = surprises[Math.floor(Math.random() * surprises.length)];
-            if (typeof triggerKiss === 'function') triggerKiss();
-            if (typeof triggerConfetti === 'function') triggerConfetti();
-        }
-
         updateLoveMeter(1000);
 
         // Audio Player Melodi
@@ -834,6 +810,12 @@ I do really love you, yin. Aku harap kita bisa terus sama sama and see each othe
             }, 600);
         }
 
+        function toggleAudio() {
+            const btn = document.getElementById('musicBtn');
+            if (!isPlaying) {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
                 if (audioCtx.state === 'suspended') {
                     audioCtx.resume();
                 }
