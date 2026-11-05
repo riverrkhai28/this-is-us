@@ -685,7 +685,7 @@ I do really love you, yin. Aku harap kita bisa terus sama sama and see each othe
                 const ul = document.getElementById('wishList');
                 const li = document.createElement('li');
                 li.className = 'wish-item';
-                li.innerHTML = `${wishText} 💙`;
+                li.textContent = wishText;
                 ul.appendChild(li);
                 input.value = "";
                 triggerConfetti();
